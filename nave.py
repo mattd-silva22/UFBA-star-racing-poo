@@ -11,8 +11,6 @@ class Nave(Image):
         
     def update(self):
 
-        from start import background
-
         if keyboard.is_key_down('Right'): #move a nave para a direita
 
             if self.x < 850: #impede que a nave saia da tela indo demais para a direita
@@ -23,8 +21,6 @@ class Nave(Image):
             if self.x > 60: #impede que a nave saia da tela indo demais para a esquerda
                 self.x -= 20
        
-       #mostra a nave na tela após apertar o botão Start Game
-        elif background._file == 'background.png':
-             self._show()
+       
 
 

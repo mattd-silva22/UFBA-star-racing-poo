@@ -11,8 +11,8 @@ class Background(Image):
         if ( 320 <  mouse.x < 580) and (250 > mouse.y > 200): #botão Start Game
             if mouse.is_button_down():
                 self.file = 'background.png'
-        elif self.file == 'background.png':
-            self.y = (self.y + 10) % 540
+
+            
 
 
 
