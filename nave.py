@@ -4,7 +4,7 @@ from tupy import *
 class Nave(Image):
     def __init__(self):
         # super().__init__('nave.png', 450, 450)
-        self.file = 'nave.png'
+        self.file = 'Naves/nave.png'
         self.x = 450
         self.y = 450
         self._hide()
@@ -20,7 +20,8 @@ class Nave(Image):
 
             if self.x > 60: #impede que a nave saia da tela indo demais para a esquerda
                 self.x -= 20
-       
+    
+    
        
 
 
