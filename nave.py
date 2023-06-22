@@ -3,10 +3,7 @@ from tupy import *
 
 class Nave(Image):
     def __init__(self):
-        # super().__init__('nave.png', 450, 450)
-        self.file = 'Naves/nave.png'
-        self.x = 450
-        self.y = 450
+        super().__init__('Naves/nave.png', 450, 450)
         self._hide()
         
     def update(self):

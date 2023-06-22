@@ -19,38 +19,31 @@ lista_meteoros = [meteoro, meteoro1, meteoro2, meteoro3, meteoro4, meteoro5, met
 
 class StartGame(BaseTupyObject):
     def __init__(self):
-       self.contador = 0
-       self.vidas = 3
+       self.temporizador = 0
+       self.pause = 0
 
     def update(self):
-        self.contador += 1
-
+        
         if background._file == 'Backgrounds/background.png':
-
+            self.temporizador += 1
             nave._show() 
 
             for i in range(len(lista_meteoros)-1):
                 lista_meteoros[i]._show()
 
-            if self.contador > 90:
+            if self.temporizador > 90: #o método update atualiza 30 vezes por segundo, então o jogo começa após 3 segundos
+                self.pause = 0
+                for i in range(len(lista_meteoros)-1):
+                    if nave._collides_with(lista_meteoros[i]):
+                        self.pause = 1
+                        self.temporizador = 0
+                        break
 
-                if self.perde_vida() == True:
-
-                    self.vidas -=1
-
-                else:
-
+                if self.pause == 0:
                     background.move()
-
                     for i in range(len(lista_meteoros)-1):
                         lista_meteoros[i].move()
                    
-    def perde_vida(self):
-        i=0
-        for i in range(len(lista_meteoros)-1):
-            if nave._collides_with(lista_meteoros[i]):
-                return True
-            return False
 
 start = StartGame()
 
