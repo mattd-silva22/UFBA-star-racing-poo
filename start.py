@@ -1,6 +1,7 @@
 from background import *
 from nave import *
 from meteoro import *
+from tupy import *
 
 background = Background()
 nave = Nave()
@@ -22,6 +23,7 @@ class StartGame(BaseTupyObject):
        self.temporizador = 0
        self.pause = 0
 
+
     def update(self):
         
         if background._file == 'Backgrounds/background.png':
@@ -34,10 +36,26 @@ class StartGame(BaseTupyObject):
             if self.temporizador > 90: #o método update atualiza 30 vezes por segundo, então o jogo começa após 3 segundos
                 self.pause = 0
                 for i in range(len(lista_meteoros)-1):
-                    if nave._collides_with(lista_meteoros[i]):
+                    if nave._collides_with(lista_meteoros[i]) and nave._estaBatendo == False:
                         self.pause = 1
                         self.temporizador = 0
-                        break
+
+                        if nave._estaBatendo == False:
+                            nave._estaBatendo = True
+                            nave.colisao()
+
+                            if nave.getVidas() > 0:
+                                toast("Tente Novamente...")
+
+                            else:
+                                toast("Fim de Jogo!")
+                                nave.destroy()
+
+                    elif not nave._collides_with(lista_meteoros[i]):
+                        nave._estaBatendo = False
+
+                    else:
+                        pass
 
                 if self.pause == 0:
                     background.move()

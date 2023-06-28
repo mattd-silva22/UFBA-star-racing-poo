@@ -5,6 +5,14 @@ class Nave(Image):
     def __init__(self):
         super().__init__('Naves/nave.png', 450, 450)
         self._hide()
+        self.vidas = 3
+        self._estaBatendo = False
+
+    def getVidas(self):
+        return self.vidas
+    
+    def colisao(self):
+        self.vidas -= 1
         
     def update(self):
 
