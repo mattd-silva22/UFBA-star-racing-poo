@@ -3,7 +3,7 @@ from tupy import *
 import random
 
 
-class Meteoro(Image):
+class Meteor(Image):
     def __init__(self):
         self.file = f'Meteors/meteoro{random.randint(1,6)}.png'
         self.x = random.randint(40, 890)
