@@ -24,6 +24,7 @@ class StartGame(BaseTupyObject):
         self.time_limit_in_seconds = 1
         self.pause_state = False
 
+
     def update(self):
         if background._file == 'Backgrounds/background.png':
             self.show_ship_and_buttons()
