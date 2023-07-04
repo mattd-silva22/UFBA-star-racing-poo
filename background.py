@@ -12,11 +12,4 @@ class Background(BaseImage):
     def move(self) -> None:
         self._y = (self._y + 10) % 540 #movimenta o background após o start game
 
-            
-
-
-
-    
-        
-                
-
+   
