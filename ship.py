@@ -1,7 +1,7 @@
 from tupy import *
 
 class Ship(Image):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__('Naves/nave1.png', 450, 450)
         self.is_paused = False
         self._hide()
@@ -12,14 +12,20 @@ class Ship(Image):
     def has_lifes(self) -> bool:
         return self.lifes > 0
 
-    def get_lifes(self):
+    def get_lifes(self) -> int:
         return self.lifes
         
-    def collision(self):
+    def collision(self) -> None:
         self.lifes -= 1
         self._is_colliding = True
+    
+    def is_colliding(self) -> bool:
+        return self._is_colliding
+    
+    def set_collision(self, value: bool = False) -> None:
+        self._is_colliding = value
         
-    def update(self):
+    def update(self) -> None:
         
         if not self.is_paused:
             if keyboard.is_key_down('Right'): #move a nave para a direita
