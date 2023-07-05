@@ -65,7 +65,10 @@ class Ship(BaseImage):
         
     def update(self) -> None:
         '''
-        
+        Método de controle do objeto da classe 'Ship'. Ao pressionar os botões
+        'Direita' e 'Esquerda' será ajustado o posicionamento da nave de acordo
+        com o desejo do usuário.
+        Este método retorna None.
         '''
         if not self._is_paused:
             if keyboard.is_key_down('Right'): #move a nave para a direita
