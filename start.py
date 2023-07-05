@@ -158,7 +158,7 @@ class StartGame(BaseTupyObject):
         Este método retorna None.
         '''
         ship._level += 1
-        ship._file = f"Naves/nave{ship.level}.png"
+        ship._file = f"Naves/nave{ship._level}.png"
         self.show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
 
     def remove_star(self, index: int) -> None:
