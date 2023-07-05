@@ -224,6 +224,7 @@ class StartGame(BaseTupyObject):
         '''
         Método que redefine todos os parâmetros e atributos para seu estado original (início
         do jogo).
+        Este método retorna None.
         '''
         global background, qtd_lifes, ship, pause_button, restart_button, meteors, stars
         
@@ -242,6 +243,8 @@ class StartGame(BaseTupyObject):
     def can_begin(self) -> Union[float, bool]:
         '''
         Método de verificação para novo reinício de jogo.
+        Este método retorna um Float, o temporizador; e um Booleano: True, se o atributo 
+        game_over for Verdadeiro; ou False, caso contrário.
         '''
         return self.temporizer/30 > self.time_limit_in_seconds and not self.game_over
 
