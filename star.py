@@ -14,8 +14,6 @@ from time import sleep
 #            Classe 'Star'            #
 # #####################################  
 
-class Star(Image):
+class Star(BaseImage):
     def __init__(self, star:int ) -> None:
-        self.file = "Stars/star.png"
-        self.x = (star + 1) * 40
-        self.y = 450
+        super().__init__("Stars/star.png", (star + 1) * 40, 450)
