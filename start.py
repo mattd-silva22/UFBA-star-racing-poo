@@ -152,23 +152,20 @@ class StartGame(BaseTupyObject):
             meteors[i].move()
 
     def upgrade_ship(self) -> None:
-        ship._level += 1
-        ship._file = f"Naves/nave{ship._level}.png"
-        '''
+        '''       
         Método que modifica dois atributos do objeto da classe 'Ship' após atingir
         uma determinada pontuação: Nível e Arquivo de Imagem.
         Este método retorna None.
         '''
-        ship.level += 1
-        ship.file = f"Naves/nave{ship.level}.png"
+        ship._level += 1
+        ship._file = f"Naves/nave{ship.level}.png"
         self.show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
 
-    def remove_star(self, index) -> None:
+    def remove_star(self, index: int) -> None:
         '''
         Método que esconde e remove um objeto da classe 'Star' em caso de perda de vidas.
         Este método retorna None.
         '''
-    def remove_star(self, index: int) -> None:
         global stars
         stars[index]._hide()
         stars.pop()
@@ -213,11 +210,11 @@ class StartGame(BaseTupyObject):
         self.game_over = True
 
     def show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
-        """
+        '''
         Funçao replica o comportamento da funçao 'toast', mas torna alguns parametros
         mais flexiveis.
         Este método retorna None.
-        """
+        '''
         import tkinter as tk
         label = tk.Label(window.root, text=message, bg="#000000", fg="#ffffff", font=("Arial", 20))
         label.place(x=x, y=y)

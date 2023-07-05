@@ -64,7 +64,9 @@ class Ship(BaseImage):
         self._is_colliding = value
         
     def update(self) -> None:
+        '''
         
+        '''
         if not self._is_paused:
             if keyboard.is_key_down('Right'): #move a nave para a direita
 
