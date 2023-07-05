@@ -19,10 +19,10 @@ class Ship(BaseImage):
         self._is_paused = False
         self._hide()
         self._lifes = 3
-        self._is_colliding = False
+        self.is_colliding = False
         self._level = 1
 
-    def has_lifes(self) -> bool:
+    def _has_lifes(self) -> bool:
         '''
         Método de verificação de quantidade do atributo "lifes".
         Este método retorna um Booleano: True, caso o valor do atributo seja
@@ -30,7 +30,7 @@ class Ship(BaseImage):
         '''
         return self._lifes > 0
 
-    def get_lifes(self) -> int:
+    def _get_lifes(self) -> int:
         '''
         Método "Getter" do valor do atributo "lifes".
         Este método retorna um Inteiro, seu valor é o valor presente no atri-
@@ -38,30 +38,30 @@ class Ship(BaseImage):
         '''
         return self._lifes
         
-    def collision(self) -> None:
+    def _collision(self) -> None:
         '''
         Método modificador de atributos, "lifes" e "_is_colliding" caso seja 
         detectado uma colisão na classe 'StartGame'.
         Este método retorna None.
         '''
         self._lifes -= 1
-        self._is_colliding = True
+        self.is_colliding = True
     
-    def is_colliding(self) -> bool:
+    def _is_colliding(self) -> bool:
         '''
         Método "Getter" do valor do atributo "_is_colliding".
         Este método retorna um Booleano: True, caso o atributo possua valor
         Verdadeiro; ou False, caso o atributo possua valor Falso.
         '''
-        return self._is_colliding
+        return self.is_colliding
     
-    def set_collision(self, value: bool = False) -> None:
+    def _set_collision(self, value: bool = False) -> None:
         '''
         Método "Setter" do valor do atributo "_is_colliding" para um valor
         Booleano.
         Este método retorna None.
         '''
-        self._is_colliding = value
+        self.is_colliding = value
         
     def update(self) -> None:
         '''

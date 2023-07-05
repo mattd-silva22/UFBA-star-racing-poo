@@ -31,13 +31,13 @@ level_limits: list[int] = [10, 30]
 class StartGame(BaseTupyObject):
     
     def __init__(self) -> None:
-        self.distance: int = 0
-        self.temporizer = 0
-        self.game_over = False
-        self.pause = False
-        self.time_limit_in_seconds = 1
-        self.pause_state = False
-        self.started = False
+        self._distance: int = 0
+        self._temporizer = 0
+        self._game_over = False
+        self._pause = False
+        self._time_limit_in_seconds = 1
+        self._pause_state = False
+        self._started = False
         self._x: int
         self._y: int
         self._tkid: int
@@ -56,30 +56,30 @@ class StartGame(BaseTupyObject):
             self.show_pointstars()
             self.show(f"pontos: {int(self.distance/10)}")
 
-            if not self.started and not self.finish_count(5):
+            if not self._started and not self._finish_count(5):
                 return
 
-            self.started = True
-            self.check_buttons()
+            self._started = True
+            self._check_buttons()
 
-            if not self.pause:
-                self.move_elements()
+            if not self._pause:
+                self._move_elements()
 
-            if not pause_button.is_clicked and self.can_begin():
-                self.distance += 1
-                self.check_ship_level()
-                self.pause = False
+            if not pause_button._is_clicked and self._can_begin():
+                self._distance += 1
+                self._check_ship_level()
+                self._pause = False
 
                 for meteor in meteors:
                     if ship._collides_with(meteor): 
-                        self.register_collision()
+                        self._register_collision()
                         
-                        if ship.has_lifes():
-                            self.remove_star(ship.get_lifes())
+                        if ship._has_lifes():
+                            self._remove_star(ship._get_lifes())
                             toast("Tente Novamente...")
 
                         else:
-                            self.end_game()
+                            self._end_game()
 
                         break
                 
@@ -89,10 +89,10 @@ class StartGame(BaseTupyObject):
                         break
 
                 else:
-                    ship.set_collision(False)
+                    ship._set_collision(False)
 
 
-    def show_ship_and_buttons(self) -> None:
+    def _show_ship_and_buttons(self) -> None:
         '''
         Método para exibição na tela dos botões de início, reinício e pausa do jogo; e, também
         da nave espacial a ser controlada pelo jogador.
@@ -103,28 +103,28 @@ class StartGame(BaseTupyObject):
         pause_button._show()
         restart_button._show()
 
-    def finish_count(self, time_limit_in_seconds: float = 3) -> bool:
+    def _finish_count(self, time_limit_in_seconds: float = 3) -> bool:
         '''
         Método contador para exibir na tela uma contagem regressiva 
         com objetivo de alertar ao jogador sobre o início do jogo.
         Este método retorna um Booleano: True, caso o contador chegue
         a 0; ou False, caso o contador seja diferente de 0.
         '''
-        count = time_limit_in_seconds - int(self.temporizer/30)
+        count = time_limit_in_seconds - int(self._temporizer/30)
 
         if count:
             self.show(message=f"{count}", duration=200, x=400, y=300)
 
         return count == 0
     
-    def register_collision(self) -> None:
+    def _register_collision(self) -> None:
         '''
         Método de chamada para o Método da classe 'Ship' a fim de registrar colisões.
         Este método retorna None.
         '''
-        self.pause = True
-        self.temporizer = 0
-        ship.collision()
+        self._pause = True
+        self._temporizer = 0
+        ship._collision()
 
     def register_collisionExtra(self) -> None:
         '''
@@ -153,7 +153,7 @@ class StartGame(BaseTupyObject):
             pointstars[i]._show()
         
     @staticmethod
-    def clicked_in_start() -> bool:
+    def _clicked_in_start() -> bool:
         '''
         Método Estático para verificação de clique no botão iniciar.
         Este método retorna um Booleano: True, se o botão foi pressionado (imagem de fundo
@@ -163,13 +163,13 @@ class StartGame(BaseTupyObject):
         return background._file == 'Backgrounds/background.png'
     
     @staticmethod
-    def move_elements() -> None:
+    def _move_elements() -> None:
         '''
         Método Estático para movimentar os objetos das classes 'Meteor', 'Background' e 
         'PointStar'.
         Este método retorna None.
         '''
-        background.move()
+        background._move()
         for i in range(len(meteors)-1):
             meteors[i].move()
         
@@ -186,7 +186,7 @@ class StartGame(BaseTupyObject):
         ship._file = f"Naves/nave{ship._level}.png"
         self.show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
 
-    def remove_star(self, index: int) -> None:
+    def _remove_star(self, index: int) -> None:
         '''
         Método que esconde e remove um objeto da classe 'Star' em caso de perda de vidas.
         Este método retorna None.
@@ -195,44 +195,44 @@ class StartGame(BaseTupyObject):
         stars[index]._hide()
         stars.pop()
     
-    def check_ship_level(self) -> None:
+    def _check_ship_level(self) -> None:
         '''
         Método de verificação da distância percorrida (pontuação) pelo jogador para permitir
         a melhoria de nível do objeto da classe 'Ship'.
         Este método retorna None.
         '''
         for level, value in enumerate(level_limits):
-            if (self.distance / 10) > value and ship._level == level + 1:
-                self.upgrade_ship()
+            if (self._distance / 10) > value and ship._level == level + 1:
+                self._upgrade_ship()
                 break
 
-    def check_buttons(self) -> None:
+    def _check_buttons(self) -> None:
         '''
         Método de verificação se algum objeto da classe 'Button' (botões de pausa e reinício)
         está pressionado para executar suas respectivas funções.
         Este método retorna None.
         '''
-        if pause_button.is_clicked:
-            pause_button.file = "Buttons/forward.png"
+        if pause_button._is_clicked:
+            pause_button._file = "Buttons/forward.png"
             toast("Jogo Pausado")
         
-        elif self.pause_state != pause_button.is_clicked:
-            pause_button.file = "Buttons/pause.png"
+        elif self._pause_state != pause_button._is_clicked:
+            pause_button._file = "Buttons/pause.png"
 
-        if restart_button.get_state():
-            self.restart_game()
-            restart_button.reset_state()
+        if restart_button._get_state():
+            self._restart_game()
+            restart_button._reset_state()
 
-        self.pause_state = ship._is_paused = pause_button.is_clicked
+        self._pause_state = ship._is_paused = pause_button._is_clicked
 
-    def end_game(self) -> None:
+    def _end_game(self) -> None:
         '''
         Método que determina o estado de "fim de jogo" do aplicativo.
         '''
-        self.remove_star(0)
+        self._remove_star(0)
         toast("Fim de Jogo!")
         ship._hide()
-        self.game_over = True
+        self._game_over = True
 
     def show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
         '''
@@ -245,7 +245,7 @@ class StartGame(BaseTupyObject):
         label.place(x=x, y=y)
         label.after(duration, label.destroy)
 
-    def restart_game(self) -> None:
+    def _restart_game(self) -> None:
         '''
         Método que redefine todos os parâmetros e atributos para seu estado original (início
         do jogo).
@@ -253,9 +253,9 @@ class StartGame(BaseTupyObject):
         '''
         global background, qtd_lifes, ship, pause_button, restart_button, meteors, stars, pointstars
         
-        self.distance = 0
-        self.temporizer = 0
-        self.game_over = False
+        self._distance = 0
+        self._temporizer = 0
+        self._game_over = False
         background = Background()
         qtd_lifes = 3
         ship = Ship()
@@ -266,13 +266,13 @@ class StartGame(BaseTupyObject):
         stars = [Star(star) for star in range(qtd_lifes)]
         pointstars = [PointStar() for pointstar in range(3)]
 
-    def can_begin(self) -> Union[float, bool]:
+    def _can_begin(self) -> Union[float, bool]:
         '''
         Método de verificação para novo reinício de jogo.
         Este método retorna um Float, o temporizador; e um Booleano: True, se o atributo 
         game_over for Verdadeiro; ou False, caso contrário.
         '''
-        return self.temporizer/30 > self.time_limit_in_seconds and not self.game_over
+        return self._temporizer/30 > self._time_limit_in_seconds and not self._game_over
 
 start = StartGame()
 run(globals())
