@@ -13,14 +13,14 @@ from tupy import *
 #            Classe 'Ship'            #
 # #####################################  
 
-class Ship(Image):
+class Ship(BaseImage):
     def __init__(self) -> None:
         super().__init__('Naves/nave1.png', 450, 450)
-        self.is_paused = False
+        self._is_paused = False
         self._hide()
-        self.lifes = 3
+        self._lifes = 3
         self._is_colliding = False
-        self.level = 1
+        self._level = 1
 
     def has_lifes(self) -> bool:
         '''
@@ -28,7 +28,7 @@ class Ship(Image):
         Este método retorna um Booleano: True, caso o valor do atributo seja
         maior que 0; False, caso o valor do atributo seja menor ou igual a 0.
         '''
-        return self.lifes > 0
+        return self._lifes > 0
 
     def get_lifes(self) -> int:
         '''
@@ -36,7 +36,7 @@ class Ship(Image):
         Este método retorna um Inteiro, seu valor é o valor presente no atri-
         buto "lifes".
         '''
-        return self.lifes
+        return self._lifes
         
     def collision(self) -> None:
         '''
@@ -44,7 +44,7 @@ class Ship(Image):
         detectado uma colisão na classe 'StartGame'.
         Este método retorna None.
         '''
-        self.lifes -= 1
+        self._lifes -= 1
         self._is_colliding = True
     
     def is_colliding(self) -> bool:
@@ -64,21 +64,17 @@ class Ship(Image):
         self._is_colliding = value
         
     def update(self) -> None:
-        '''
-        Método de Controle do objeto da classe 'Ship'. Atualiza o posicionamento
-        da nave a depender do botão pressionado.
-        Este método retorna None.
-        '''
-        if not self.is_paused:
+        
+        if not self._is_paused:
             if keyboard.is_key_down('Right'): #move a nave para a direita
 
-                if self.x < 850: #impede que a nave saia da tela indo demais para a direita
-                    self.x += 15
+                if self._x < 850: #impede que a nave saia da tela indo demais para a direita
+                    self._x += 15
 
             elif keyboard.is_key_down('Left'): #move a nave para a esquerda
 
-                if self.x > 60: #impede que a nave saia da tela indo demais para a esquerda
-                    self.x -= 15
+                if self._x > 60: #impede que a nave saia da tela indo demais para a esquerda
+                    self._x -= 15
         
         
         

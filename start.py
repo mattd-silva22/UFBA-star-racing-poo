@@ -7,7 +7,11 @@ from ship import *
 from meteor import Meteor
 from button import Button
 from star import Star
-from tupy import *
+from typing import Union
+
+# #####################################
+#          Variáveis Globais          #
+# #####################################  
 
 # #####################################
 #          Variáveis Globais          #
@@ -18,9 +22,9 @@ qtd_lifes: int = 3
 ship = Ship()
 pause_button = Button(780, 50, "Buttons/pause.png")
 restart_button = Button(870, 50, "Buttons/return.png")
-meteors: list = [Meteor() for meteor in range(10)]
-stars: list = [Star(star) for star in range(qtd_lifes)]
-level_limits: list = [10, 30]
+meteors: list[Meteor] = [Meteor() for meteor in range(10)]
+stars: list[Star] = [Star(star) for star in range(qtd_lifes)]
+level_limits: list[int] = [10, 30]
 
 # #####################################
 #          Classe 'StartGame'         #
@@ -148,6 +152,8 @@ class StartGame(BaseTupyObject):
             meteors[i].move()
 
     def upgrade_ship(self) -> None:
+        ship._level += 1
+        ship._file = f"Naves/nave{ship._level}.png"
         '''
         Método que modifica dois atributos do objeto da classe 'Ship' após atingir
         uma determinada pontuação: Nível e Arquivo de Imagem.
@@ -162,6 +168,7 @@ class StartGame(BaseTupyObject):
         Método que esconde e remove um objeto da classe 'Star' em caso de perda de vidas.
         Este método retorna None.
         '''
+    def remove_star(self, index: int) -> None:
         global stars
         stars[index]._hide()
         stars.pop()
@@ -173,7 +180,7 @@ class StartGame(BaseTupyObject):
         Este método retorna None.
         '''
         for level, value in enumerate(level_limits):
-            if (self.distance / 10) > value and ship.level == level + 1:
+            if (self.distance / 10) > value and ship._level == level + 1:
                 self.upgrade_ship()
                 break
 
@@ -194,9 +201,9 @@ class StartGame(BaseTupyObject):
             self.restart_game()
             restart_button.reset_state()
 
-        self.pause_state = ship.is_paused = pause_button.is_clicked
+        self.pause_state = ship._is_paused = pause_button.is_clicked
 
-    def end_game(self):
+    def end_game(self) -> None:
         '''
         Método que determina o estado de "fim de jogo" do aplicativo.
         '''
@@ -205,7 +212,7 @@ class StartGame(BaseTupyObject):
         ship._hide()
         self.game_over = True
 
-    def show(self, message: str, duration: int = 2000, x=300, y=100) -> None:
+    def show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
         """
         Funçao replica o comportamento da funçao 'toast', mas torna alguns parametros
         mais flexiveis.
@@ -216,7 +223,7 @@ class StartGame(BaseTupyObject):
         label.place(x=x, y=y)
         label.after(duration, label.destroy)
 
-    def restart_game(self):
+    def restart_game(self) -> None:
         '''
         Método que redefine todos os parâmetros e atributos para seu estado original (início
         do jogo).
@@ -235,7 +242,7 @@ class StartGame(BaseTupyObject):
         meteors = [Meteor() for meteor in range(10)]
         stars = [Star(star) for star in range(qtd_lifes)]
 
-    def can_begin(self):
+    def can_begin(self) -> Union[float, bool]:
         '''
         Método de verificação para novo reinício de jogo.
         '''
