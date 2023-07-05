@@ -30,16 +30,16 @@ class Button(BaseImage):
         if (self._x <  mouse.x < self._x + 80) and (self._y < mouse.y < self._y + 80):
             if mouse.is_button_down():
                 sleep(0.01)
-                self.click()
+                self._click()
 
-    def click(self) -> None:
+    def _click(self) -> None:
         '''
         Método para funcionalidade de clique no objeto da classe 'Button'.
         Este método retorna None.
         '''
         self._is_clicked = not self._is_clicked
     
-    def get_state(self) -> bool:
+    def _get_state(self) -> bool:
         '''
         Método "Getter" para o valor do atributo "is_clicked".
         Este método retorna um Booleano: True, se o atributo "is_clicked"
@@ -47,7 +47,7 @@ class Button(BaseImage):
         '''
         return self._is_clicked
     
-    def reset_state(self) -> None:
+    def _reset_state(self) -> None:
         '''
         Método de redefinição do atributo "is_clicked" para seu valor original.
         Este método retorna None.
@@ -59,4 +59,4 @@ if __name__ == '__main__':
     restart_button = Button(10, 10, "return.png")
 
     print(dir(pause_button))
-    pause_button.click()
+    pause_button._click()

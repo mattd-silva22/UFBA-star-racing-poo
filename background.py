@@ -27,7 +27,7 @@ class Background(BaseImage):
             if mouse.is_button_down():
                 self._file = 'Backgrounds/background.png'
 
-    def move(self) -> None:
+    def _move(self) -> None:
         '''
         Método de movimentação do objeto da classe 'Background' (responsavel pela sensa-
         ção de movimento).
