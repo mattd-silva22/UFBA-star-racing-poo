@@ -22,7 +22,7 @@ O botão de restart zera os pontos e retorna a quantidade de vidas iniciais, pod
 Este projeto foi desenvolvido por:
 
 * **Eva Raposo** - *Trabalho Inicial* 
-* **Fábio Miguel** - *Documentación*
+* **Fábio Miguel** - *Documentação*, *Colisões* e *Pontos Extras*
 * **Priscila Araújo** - *Trabalho Inicial* 
 * **Matheus** - *Documentación*
 * * **Eliel** - *Documentación* 
