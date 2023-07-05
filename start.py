@@ -3,16 +3,16 @@ from ship import *
 from meteor import Meteor
 from button import Button
 from star import Star
-from tupy import *
+from typing import Union
 
 background = Background()
 qtd_lifes: int = 3
 ship = Ship()
 pause_button = Button(780, 50, "Buttons/pause.png")
 restart_button = Button(870, 50, "Buttons/return.png")
-meteors: list = [Meteor() for meteor in range(10)]
-stars: list = [Star(star) for star in range(qtd_lifes)]
-level_limits: list = [10, 30]
+meteors: list[Meteor] = [Meteor() for meteor in range(10)]
+stars: list[Star] = [Star(star) for star in range(qtd_lifes)]
+level_limits: list[int] = [10, 30]
 
 class StartGame(BaseTupyObject):
     
@@ -101,18 +101,18 @@ class StartGame(BaseTupyObject):
             meteors[i].move()
 
     def upgrade_ship(self) -> None:
-        ship.level += 1
-        ship.file = f"Naves/nave{ship.level}.png"
+        ship._level += 1
+        ship._file = f"Naves/nave{ship._level}.png"
         self.show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
 
-    def remove_star(self, index) -> None:
+    def remove_star(self, index: int) -> None:
         global stars
         stars[index]._hide()
         stars.pop()
     
     def check_ship_level(self) -> None:
         for level, value in enumerate(level_limits):
-            if self.distance > value and ship.level == level + 1:
+            if (self.distance / 10) > value and ship._level == level + 1:
                 self.upgrade_ship()
                 break
 
@@ -128,15 +128,15 @@ class StartGame(BaseTupyObject):
             self.restart_game()
             restart_button.reset_state()
 
-        self.pause_state = ship.is_paused = pause_button.is_clicked
+        self.pause_state = ship._is_paused = pause_button.is_clicked
 
-    def end_game(self):
+    def end_game(self) -> None:
         self.remove_star(0)
         toast("Fim de Jogo!")
         ship._hide()
         self.game_over = True
 
-    def show(self, message: str, duration: int = 2000, x=300, y=100) -> None:
+    def show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
         """
         Funcao replica o comportamento da funcao 'toast', mas torna alguns parametros
         mais flexiveis.
@@ -146,7 +146,7 @@ class StartGame(BaseTupyObject):
         label.place(x=x, y=y)
         label.after(duration, label.destroy)
 
-    def restart_game(self):
+    def restart_game(self) -> None:
         global background, qtd_lifes, ship, pause_button, restart_button, meteors, stars
         
         self.distance = 0
@@ -161,7 +161,7 @@ class StartGame(BaseTupyObject):
         meteors = [Meteor() for meteor in range(10)]
         stars = [Star(star) for star in range(qtd_lifes)]
 
-    def can_begin(self):
+    def can_begin(self) -> Union[float, bool]:
         return self.temporizer/30 > self.time_limit_in_seconds and not self.game_over
 
 start = StartGame()
