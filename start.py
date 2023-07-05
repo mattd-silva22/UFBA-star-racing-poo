@@ -5,13 +5,10 @@
 from background import *
 from ship import *
 from meteor import Meteor
+from pointstar import PointStar
 from button import Button
 from star import Star
 from typing import Union
-
-# #####################################
-#          Variáveis Globais          #
-# #####################################  
 
 # #####################################
 #          Variáveis Globais          #
@@ -23,6 +20,7 @@ ship = Ship()
 pause_button = Button(780, 50, "Buttons/pause.png")
 restart_button = Button(870, 50, "Buttons/return.png")
 meteors: list[Meteor] = [Meteor() for meteor in range(10)]
+pointstars: list[PointStar] = [PointStar() for pointstar in range(3)]
 stars: list[Star] = [Star(star) for star in range(qtd_lifes)]
 level_limits: list[int] = [10, 30]
 
@@ -55,6 +53,7 @@ class StartGame(BaseTupyObject):
             self.temporizer += 1
             self.show_ship_and_buttons()
             self.show_meteors()
+            self.show_pointstars()
             self.show(f"pontos: {int(self.distance/10)}")
 
             if not self.started and not self.finish_count(5):
@@ -82,6 +81,11 @@ class StartGame(BaseTupyObject):
                         else:
                             self.end_game()
 
+                        break
+                
+                for pointstar in pointstars:
+                    if ship._collides_with(pointstar):
+                        self.register_collisionExtra()
                         break
 
                 else:
@@ -122,6 +126,14 @@ class StartGame(BaseTupyObject):
         self.temporizer = 0
         ship.collision()
 
+    def register_collisionExtra(self) -> None:
+        '''
+        Método Auxiliar a fim de registrar colisões do objeto da classe 'Ship' e os
+        objetos da classe 'PointStar'.
+        Este método retorna None.
+        '''
+        self.distance += 10
+
     def show_meteors(self) -> None:
         '''
         Método para exibição dos objetos da Classe 'Meteor' na tela.
@@ -131,6 +143,15 @@ class StartGame(BaseTupyObject):
         for i in range(len(meteors)-1):
             meteors[i]._show()
 
+    def show_pointstars(self) -> None:
+        '''
+        Método para exibição dos objetos da Classe 'PointStar' na tela.
+        Este método retorna None.
+        '''
+        global pointstars
+        for i in range(len(pointstars)-1):
+            pointstars[i]._show()
+        
     @staticmethod
     def clicked_in_start() -> bool:
         '''
@@ -144,12 +165,16 @@ class StartGame(BaseTupyObject):
     @staticmethod
     def move_elements() -> None:
         '''
-        Método Estático para movimentar os objetos das classes 'Meteor' e 'Background'.
+        Método Estático para movimentar os objetos das classes 'Meteor', 'Background' e 
+        'PointStar'.
         Este método retorna None.
         '''
         background.move()
         for i in range(len(meteors)-1):
             meteors[i].move()
+        
+        for i in range(len(pointstars)-1):
+            pointstars[i].move()
 
     def upgrade_ship(self) -> None:
         '''       
@@ -226,7 +251,7 @@ class StartGame(BaseTupyObject):
         do jogo).
         Este método retorna None.
         '''
-        global background, qtd_lifes, ship, pause_button, restart_button, meteors, stars
+        global background, qtd_lifes, ship, pause_button, restart_button, meteors, stars, pointstars
         
         self.distance = 0
         self.temporizer = 0
@@ -239,6 +264,7 @@ class StartGame(BaseTupyObject):
         restart_button = Button(870, 50, "Buttons/return.png")
         meteors = [Meteor() for meteor in range(10)]
         stars = [Star(star) for star in range(qtd_lifes)]
+        pointstars = [PointStar() for pointstar in range(3)]
 
     def can_begin(self) -> Union[float, bool]:
         '''
