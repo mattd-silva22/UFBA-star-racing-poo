@@ -27,15 +27,15 @@ class Button(BaseImage):
         dos objetos da classe 'Button'.
         Este método retorna None.
         '''
-        if (self._x <  mouse.x < self._x + 80) and (self._y < mouse.y < self._y + 80):
+        if (self._x <  mouse.x < self._x + 80) and (self._y - 20 < mouse.y < self._y + 80):
             if mouse.is_button_down():
-                sleep(0.01)
                 self._click()
+                sleep(0.5)
 
     def _click(self) -> None:
         '''
         Método para funcionalidade de clique no objeto da classe 'Button'.
-        Este método retorna None.
+        Este método retorna None.   
         '''
         self._is_clicked = not self._is_clicked
     

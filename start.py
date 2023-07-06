@@ -50,20 +50,17 @@ class StartGame(BaseTupyObject):
         Este método retorna None.
         '''
         if self.clicked_in_start():
-            self.temporizer += 1
-            self.show_ship_and_buttons()
+            self._temporizer += 1
+            self._show_ship_and_buttons()
             self.show_meteors()
             self.show_pointstars()
-            self.show(f"pontos: {int(self.distance/10)}")
+            self._show(f"pontos: {int(self._distance/10)}")
 
-            if not self._started and not self._finish_count(5):
+            if not self._started and not self._finish_count(1):
                 return
 
             self._started = True
             self._check_buttons()
-
-            if not self._pause:
-                self._move_elements()
 
             if not pause_button._is_clicked and self._can_begin():
                 self._distance += 1
@@ -74,11 +71,11 @@ class StartGame(BaseTupyObject):
                     if ship._collides_with(meteor): 
                         self._register_collision()
                         
-                        if ship._has_lifes():
+                        try:
                             self._remove_star(ship._get_lifes())
                             toast("Tente Novamente...")
 
-                        else:
+                        except:
                             self._end_game()
 
                         break
@@ -91,6 +88,7 @@ class StartGame(BaseTupyObject):
                 else:
                     ship._set_collision(False)
 
+                self._move_elements()
 
     def _show_ship_and_buttons(self) -> None:
         '''
@@ -113,7 +111,7 @@ class StartGame(BaseTupyObject):
         count = time_limit_in_seconds - int(self._temporizer/30)
 
         if count:
-            self.show(message=f"{count}", duration=200, x=400, y=300)
+            self._show(message=f"{count}", duration=200, x=400, y=300)
 
         return count == 0
     
@@ -132,7 +130,7 @@ class StartGame(BaseTupyObject):
         objetos da classe 'PointStar'.
         Este método retorna None.
         '''
-        self.distance += 10
+        self._distance += 10
 
     def show_meteors(self) -> None:
         '''
@@ -153,7 +151,7 @@ class StartGame(BaseTupyObject):
             pointstars[i]._show()
         
     @staticmethod
-    def _clicked_in_start() -> bool:
+    def clicked_in_start() -> bool:
         '''
         Método Estático para verificação de clique no botão iniciar.
         Este método retorna um Booleano: True, se o botão foi pressionado (imagem de fundo
@@ -169,14 +167,14 @@ class StartGame(BaseTupyObject):
         'PointStar'.
         Este método retorna None.
         '''
-        background._move()
+        background.move()
         for i in range(len(meteors)-1):
             meteors[i].move()
         
         for i in range(len(pointstars)-1):
             pointstars[i].move()
 
-    def upgrade_ship(self) -> None:
+    def _upgrade_ship(self) -> None:
         '''       
         Método que modifica dois atributos do objeto da classe 'Ship' após atingir
         uma determinada pontuação: Nível e Arquivo de Imagem.
@@ -184,7 +182,7 @@ class StartGame(BaseTupyObject):
         '''
         ship._level += 1
         ship._file = f"Naves/nave{ship._level}.png"
-        self.show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
+        self._show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
 
     def _remove_star(self, index: int) -> None:
         '''
@@ -234,7 +232,7 @@ class StartGame(BaseTupyObject):
         ship._hide()
         self._game_over = True
 
-    def show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
+    def _show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
         '''
         Funçao replica o comportamento da funçao 'toast', mas torna alguns parametros
         mais flexiveis.
