@@ -18,7 +18,7 @@ Existem estrelas no mesmo espaço que os meteoros, pegue-as e ganhe pontos extra
 
 Este projeto foi desenvolvido por:
 
-* **Eva Raposo** - *Movimentos da nave*, *Backgrounds e Botão inicial*, *Criação de obstáculos*, *Busca por Assets* - Nota: 5 
+* **Eva Raposo** - *Movimentos da nave*, *Backgrounds e Botão inicial*, *Criação de obstáculos*, *Busca por Assets*, *Membros privados* - Nota: 5 
 
 * **Fábio Miguel** - *Documentação*, *Colisões* e *Pontos Extras* - Nota: 4
 
@@ -26,7 +26,7 @@ Este projeto foi desenvolvido por:
    
 * **Matheus** - *Ideia inicial do projeto e criou repositório* - Nota: 1
 
-* * **Eliel Batista** - *Idealizar as colisões e ajuda na realização do código* Nota: 2 
+* **Eliel Batista** - *Idealizar as colisões e ajuda na realização do código* - Nota: 2 
 
 Aqui você pode ver a lista de todos os [colaboradores e contribuições](https://github.com/mattd-silva22/UFBA-star-racing-poo/graphs/contributors) que participaram deste projeto e as suas contribuições.
 
