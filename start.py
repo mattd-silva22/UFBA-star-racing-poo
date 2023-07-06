@@ -22,7 +22,7 @@ restart_button = Button(870, 50, "Buttons/return.png")
 meteors: list[Meteor] = [Meteor() for meteor in range(10)]
 pointstars: list[PointStar] = [PointStar() for pointstar in range(3)]
 stars: list[Star] = [Star(star) for star in range(qtd_lifes)]
-level_limits: list[int] = [10, 30]
+level_limits: list[int] = [30, 100]
 
 # #####################################
 #          Classe 'StartGame'         #
