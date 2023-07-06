@@ -54,7 +54,7 @@ class StartGame(BaseTupyObject):
             self._show_ship_and_buttons()
             self.show_meteors()
             self.show_pointstars()
-            self._show(f"pontos: {int(self._distance/10)}")
+            self.__show(f"pontos: {int(self._distance/10)}")
 
             if not self._started and not self._finish_count(1):
                 return
@@ -107,7 +107,7 @@ class StartGame(BaseTupyObject):
         count = time_limit_in_seconds - int(self._temporizer/30)
 
         if count:
-            self._show(message=f"{count}", duration=200, x=400, y=300)
+            self.__show(message=f"{count}", duration=200, x=400, y=300)
 
         return count == 0
     
@@ -178,7 +178,7 @@ class StartGame(BaseTupyObject):
         '''
         ship._level += 1
         ship._file = f"Naves/nave{ship._level}.png"
-        self._show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
+        self.__show(message="Voce subiu de nivel!", duration=1000, x=10, y=150)
 
     def _remove_star(self, index: int) -> None:
         '''
@@ -227,11 +227,11 @@ class StartGame(BaseTupyObject):
         '''
         Método que determina o estado de "fim de jogo" do aplicativo.
         '''
-        self._show(message="Fim de Jogo!", duration=3000, x=350, y=400)
+        self.__show(message="Fim de Jogo!", duration=3000, x=350, y=400)
         ship._hide()
         self._game_over = True
 
-    def _show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
+    def __show(self, message: str, duration: int = 2000, x: int =300, y: int =100) -> None:
         '''
         Funçao replica o comportamento da funçao 'toast', mas torna alguns parametros
         mais flexiveis.

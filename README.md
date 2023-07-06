@@ -20,9 +20,9 @@ Este projeto foi desenvolvido por:
 
 * **Eva Raposo** - *Movimentos da nave*, *Backgrounds e Botão inicial*, *Criação de obstáculos*, *Busca por Assets*, *Membros privados*, *Correção de tipagem* - Nota: 5 
 
-* **Fábio Miguel** - *Documentação*, *Colisões* e *Pontos Extras* - Nota: 4
+* **Fábio Miguel** - *Documentação*, *Colisões*, *Pontos Extras* e *Testes* - Nota: 4
 
-* **Priscila Araújo** - *Botões de pause e restart*, *Contagem de vidas*, *Contagem de pontos*, *Upgrade de nave dependendo da distância/pontos*, *Encapsulamento*, *Busca por Assets*, *Tratamento de erros*, *README* e *Refatoramento de códigos com boas práticas e generalização* - Nota: 5 
+* **Priscila Araújo** - *Botões de pause e restart*, *Contagem de vidas*, *Contagem de pontos*, *Upgrade de nave dependendo da distância/pontos*, *Encapsulamento*, *Busca por Assets*, *Tratamento de erros*, *README*, *Refatoramento de códigos com boas práticas e generalização* e *Tipagem Estática*- Nota: 5 
    
 * **Matheus** - *Ideia inicial do projeto e criou repositório* - Nota: 1
 
