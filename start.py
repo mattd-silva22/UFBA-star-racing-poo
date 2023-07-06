@@ -71,12 +71,8 @@ class StartGame(BaseTupyObject):
                     if ship._collides_with(meteor): 
                         self._register_collision()
                         
-                        try:
-                            self._remove_star(ship._get_lifes())
-                            toast("Tente Novamente...")
-
-                        except:
-                            self._end_game()
+                        self._remove_star(ship._get_lifes())
+                        toast("Tente Novamente...")
 
                         break
                 
@@ -190,8 +186,12 @@ class StartGame(BaseTupyObject):
         Este método retorna None.
         '''
         global stars
-        stars[index]._hide()
-        stars.pop()
+        
+        try:
+            stars[index]._hide()
+            stars.pop()
+        except IndexError:
+            self._end_game()
     
     def _check_ship_level(self) -> None:
         '''
@@ -227,8 +227,7 @@ class StartGame(BaseTupyObject):
         '''
         Método que determina o estado de "fim de jogo" do aplicativo.
         '''
-        self._remove_star(0)
-        toast("Fim de Jogo!")
+        self._show(message="Fim de Jogo!", duration=3000, x=350, y=400)
         ship._hide()
         self._game_over = True
 
