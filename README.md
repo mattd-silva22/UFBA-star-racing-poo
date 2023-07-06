@@ -18,7 +18,7 @@ Existem estrelas no mesmo espaço que os meteoros, pegue-as e ganhe pontos extra
 
 Este projeto foi desenvolvido por:
 
-* **Eva Raposo** - *Movimentos da nave*, *Backgrounds e Botão inicial*, *Criação de obstáculos*, *Busca por Assets*, *Membros privados* - Nota: 5 
+* **Eva Raposo** - *Movimentos da nave*, *Backgrounds e Botão inicial*, *Criação de obstáculos*, *Busca por Assets*, *Membros privados*, *Correção de tipagem* - Nota: 5 
 
 * **Fábio Miguel** - *Documentação*, *Colisões* e *Pontos Extras* - Nota: 4
 
